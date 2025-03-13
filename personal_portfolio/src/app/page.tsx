@@ -643,7 +643,7 @@ const projects: Project[] = [
     title: "Resonate Hub",
     description: "A community platform for connecting like-minded individuals with shared interests, featuring real-time chat and event organization.",
     image: "/assets/images/image_2.svg?height=200&width=400",
-    technologies: ["React", "Firebase", "Material UI", "Redux", "Node.js"],
+    technologies: ["Next.js", "Django", "PostgreSQL", "Material UI", "Redux"],
     github: "https://github.com/tafadzwa-chigumira/resonate-hub",
     demo: "https://resonate-hub.example.com",
   },
