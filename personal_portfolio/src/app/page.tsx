@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect,useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { GithubLogo, Envelope, LinkedinLogo, ArrowSquareOut, List, X } from "@phosphor-icons/react/dist/ssr";
@@ -29,7 +29,7 @@ interface SkillCategory {
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+
   
   const { ref: homeRef, inView: homeInView } = useInView({ threshold: 0.5 });
   const { ref: projectsRef, inView: projectsInView } = useInView({ threshold: 0.2 });
@@ -103,7 +103,7 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen p-10 " ref={scrollRef}>
+    <div className="flex flex-col min-h-screen p-10">
       {/* Header */}
       <header className="sticky top-0 z-10 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center justify-between px-4 md:px-6">
