@@ -1,14 +1,13 @@
 "use client";
-import { useEffect,useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { GithubLogo, Envelope, LinkedinLogo, ArrowSquareOut, List, X } from "@phosphor-icons/react/dist/ssr";
-import Lenis from "lenis";
+
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils"; 
 
 
@@ -29,13 +28,6 @@ interface SkillCategory {
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-
-  
-  const { ref: homeRef, inView: homeInView } = useInView({ threshold: 0.5 });
-  const { ref: projectsRef, inView: projectsInView } = useInView({ threshold: 0.2 });
-  const { ref: skillsRef, inView: skillsInView } = useInView({ threshold: 0.2 });
-  const { ref: aboutRef, inView: aboutInView } = useInView({ threshold: 0.2 });
-  const { ref: contactRef, inView: contactInView } = useInView({ threshold: 0.2 });
   
   
   const [formData, setFormData] = useState({
@@ -45,33 +37,6 @@ export default function Portfolio() {
   });
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   
-  
-  useEffect(() => {
-    if (homeInView) setActiveSection("home");
-    else if (projectsInView) setActiveSection("projects");
-    else if (skillsInView) setActiveSection("skills");
-    else if (aboutInView) setActiveSection("about");
-    else if (contactInView) setActiveSection("contact");
-  }, [homeInView, projectsInView, skillsInView, aboutInView, contactInView]);
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      orientation: 'vertical',
-      smoothWheel: true,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
   
 
   const handleNavClick = (sectionId: string) => {
@@ -245,7 +210,7 @@ export default function Portfolio() {
         <section 
           id="home" 
           className="container grid items-center gap-6 pt-6 pb-8 md:py-10"
-          ref={homeRef}
+          
         >
           <div className="flex flex-col items-start gap-4">
             <div className="inline-block">
@@ -277,7 +242,7 @@ export default function Portfolio() {
         <section 
           id="projects" 
           className="container py-12 md:py-16 lg:py-20"
-          ref={projectsRef}
+        
         >
           <h2 className="text-3xl font-bold tracking-tight mb-4">Featured Projects</h2>
           <p className="text-muted-foreground mb-8 max-w-[800px]">
@@ -360,7 +325,7 @@ export default function Portfolio() {
         <section 
           id="skills" 
           className="py-12 md:py-16 lg:py-20 bg-muted/40"
-          ref={skillsRef}
+          
         >
           <div className="container">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Skills & Technologies</h2>
@@ -390,7 +355,7 @@ export default function Portfolio() {
         <section 
           id="about" 
           className="container py-12 md:py-16 lg:py-20"
-          ref={aboutRef}
+        
         >
           <div className="grid gap-10 md:grid-cols-2 items-center">
             <div className="relative aspect-square md:aspect-auto md:h-full max-h-[500px] rounded-lg overflow-hidden shadow-lg">
@@ -441,7 +406,6 @@ export default function Portfolio() {
         <section 
           id="contact" 
           className="py-12 md:py-16 lg:py-20 bg-muted/40"
-          ref={contactRef}
         >
           <div className="container">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Get In Touch</h2>
